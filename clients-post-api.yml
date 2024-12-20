@@ -1,0 +1,94 @@
+openapi: 3.0.0
+info:
+  title: Clients API
+  description: API для управления списком клиентов с поддержкой пагинации и добавления новых клиентов.
+  version: 1.0.0
+
+paths:
+  /clients:
+    post:
+      summary: Получить список клиентов
+      description: Возвращает список клиентов с поддержкой пагинации и фильтрацией.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: integer
+                  description: Номер страницы (начиная с 1). Используется для получения списка клиентов.
+                  default: 1
+                pageSize:
+                  type: integer
+                  description: Количество клиентов на странице. Используется для получения списка клиентов.
+                  default: 10
+                age:
+                  type: integer
+                  description: Фильтрация по возрасту клиента. Используется для получения списка клиентов.
+                city:
+                  type: string
+                  description: Фильтрация по городу проживания клиента. Используется для получения списка клиентов.
+      responses:
+        '200':
+          description: Список клиентов успешно получен.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                    description: Общее количество клиентов.
+                  page:
+                    type: integer
+                    description: Текущая страница.
+                  pageSize:
+                    type: integer
+                    description: Размер страницы.
+                  clients:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Client'
+        '400':
+          description: Некорректные параметры запроса.
+        '500':
+          description: Ошибка сервера.
+
+  /clients/create:
+    post:
+      summary: Добавить нового клиента
+      description: Создает новую запись клиента.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Client'
+      responses:
+        '201':
+          description: Клиент успешно создан.
+        '400':
+          description: Некорректные данные запроса.
+        '500':
+          description: Ошибка сервера.
+
+components:
+  schemas:
+    Client:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Имя клиента.
+        age:
+          type: integer
+          description: Возраст клиента.
+        city:
+          type: string
+          description: Город проживания клиента.
+      required:
+        - name
+        - age
+        - city

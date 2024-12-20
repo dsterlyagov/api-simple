@@ -1,0 +1,72 @@
+Эндпоинт: POST /clients
+Получение первой страницы списка клиентов с размером страницы по умолчанию:
+
+
+POST /clients HTTP/1.1
+Host: api.example.com
+Content-Type: application/json
+
+{
+  "page": 1,
+  "pageSize": 10
+}
+Получение второй страницы с фильтрацией по возрасту 25:
+
+
+POST /clients HTTP/1.1
+Host: api.example.com
+Content-Type: application/json
+
+{
+  "page": 2,
+  "pageSize": 5,
+  "age": 25
+}
+Фильтрация клиентов из города «Москва»:
+
+http
+Копировать код
+POST /clients HTTP/1.1
+Host: api.example.com
+Content-Type: application/json
+
+{
+  "city": "Москва"
+}
+Комбинированная фильтрация: клиенты возраста 30 из города «Санкт-Петербург»:
+
+http
+Копировать код
+POST /clients HTTP/1.1
+Host: api.example.com
+Content-Type: application/json
+
+{
+  "age": 30,
+  "city": "Санкт-Петербург"
+}
+Эндпоинт: POST /clients/create
+Добавление нового клиента:
+
+
+POST /clients/create HTTP/1.1
+Host: api.example.com
+Content-Type: application/json
+
+{
+  "name": "Иван Иванов",
+  "age": 34,
+  "city": "Москва"
+}
+Добавление клиента с минимально необходимыми данными:
+
+
+POST /clients/create HTTP/1.1
+Host: api.example.com
+Content-Type: application/json
+
+{
+  "name": "Анна Смирнова",
+  "age": 28,
+  "city": "Казань"
+}

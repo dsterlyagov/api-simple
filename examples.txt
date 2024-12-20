@@ -1,0 +1,52 @@
+Пример запросов к эндпоинту GET /clients
+Получение первой страницы списка клиентов с размером страницы по умолчанию (10 записей):
+
+
+GET /clients?page=1 HTTP/1.1
+Host: api.example.com
+Получение второй страницы с размером страницы 5:
+
+http
+
+GET /clients?page=2&pageSize=5 HTTP/1.1
+Host: api.example.com
+Фильтрация клиентов по возрасту 25:
+
+
+GET /clients?age=25 HTTP/1.1
+Host: api.example.com
+Фильтрация клиентов по городу «Москва»:
+
+
+GET /clients?city=Москва HTTP/1.1
+Host: api.example.com
+Комбинированная фильтрация: клиенты возраста 30 из города «Санкт-Петербург»:
+
+
+GET /clients?age=30&city=Санкт-Петербург HTTP/1.1
+Host: api.example.com
+Пример запросов к эндпоинту POST /clients
+Добавление нового клиента:
+
+
+POST /clients HTTP/1.1
+Host: api.example.com
+Content-Type: application/json
+
+{
+  "name": "Иван Иванов",
+  "age": 34,
+  "city": "Москва"
+}
+Добавление клиента с минимально необходимыми данными:
+
+
+POST /clients HTTP/1.1
+Host: api.example.com
+Content-Type: application/json
+
+{
+  "name": "Анна Смирнова",
+  "age": 28,
+  "city": "Казань"
+}
